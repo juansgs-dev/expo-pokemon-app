@@ -58,7 +58,7 @@ function getIdFromUrl(url: string): number {
   return match ? Number(match[1]) : 0;
 }
 function getArtworkUrl(id: number) {
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+  return `${process.env.EXPO_PUBLIC_IMG_URL}${id}.png`;
 }
 
 const styles = StyleSheet.create({
