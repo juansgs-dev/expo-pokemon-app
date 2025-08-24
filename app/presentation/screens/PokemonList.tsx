@@ -9,8 +9,10 @@ import {
   View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch } from 'react-redux';
 import { PokemonRepository } from "../../data/repositories/PokemonRepository";
 import PokemonCard from "../components/PokemonCard";
+import { addToPokedex } from '../store/pokemonSlice';
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width / 2 - 24;
@@ -32,6 +34,8 @@ export default function PokemonList() {
   const [searchText, setSearchText] = useState("");
   const [typeFilter, setTypeFilter] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<"id" | "name_asc" | "name_desc" | "type">("id");
+
+  const dispatch = useDispatch();
 
   const fetchPokemons = useCallback(async () => {
     if (loading || !hasMore) return;
@@ -61,8 +65,8 @@ export default function PokemonList() {
     fetchPokemons();
   }, []);
 
-  const addToCart = (pokemon: any) => {
-    setCart((prev) => [...prev, pokemon]);
+  const handleAdd = (pokemon: any) => {
+    dispatch(addToPokedex(pokemon));
   };
 
   const filteredPokemons = pokemons
@@ -119,7 +123,7 @@ export default function PokemonList() {
             }}
             itemStyle={{ color: '#fff', fontSize: 12 }}
           >
-        
+
             <Picker.Item label="Todos los tipos" value={null} />
 
             {TYPES.map((type) => (
@@ -165,9 +169,10 @@ export default function PokemonList() {
             id={item.id}
             name={item.name}
             image={item.image}
+            price={item.price}
             types={item.types}
             width={CARD_WIDTH}
-            onAdd={() => addToCart(item)}
+            onAdd={() => handleAdd(item)}
           />
         )}
         ListFooterComponent={

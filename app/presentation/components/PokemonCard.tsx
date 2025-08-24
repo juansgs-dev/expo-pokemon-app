@@ -12,18 +12,19 @@ import {
 } from "react-native";
 import { darkTheme } from "../../theme/colors";
 
-
 type Props = {
   id: string;
   name: string;
   image: string;
+  price: number;
   types: string[];
   width: number;
   onAdd: () => void;
 };
 
-export default function PokemonCard({ id, name, image, types, width, onAdd }: Props) {
+export default function PokemonCard({ id, name, image, price, types, width, onAdd }: Props) {
   const [imgLoading, setImgLoading] = useState(true);
+  const [isPressed, setIsPressed] = useState(false);
 
   return (
     <View style={[styles.card, { width }]}>
@@ -38,49 +39,59 @@ export default function PokemonCard({ id, name, image, types, width, onAdd }: Pr
         />
       </View>
 
-      <Text style={styles.id}>#{id}</Text>
+      <View style={styles.infoContainer}>
+        <Text style={styles.id}>#{id}</Text>
 
-      <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name}>{name}</Text>
 
-      <View style={styles.typesContainer}>
-        {types.map((type) => (
-          <View
-            key={type}
-            style={[styles.typeBadge, { backgroundColor: typeColors[type] || "#777" }]}
-          >
-            <Text style={styles.typeText}>{type}</Text>
-          </View>
-        ))}
+        <View style={styles.priceContainer}>
+          <Text style={styles.price}>${price}</Text>
+        </View>
+
+        <View style={styles.typesContainer}>
+          {types.map((type) => (
+            <View
+              key={type}
+              style={[styles.typeBadge, { backgroundColor: typeColors[type] || "#777" }]}
+            >
+              <Text style={styles.typeText}>{type}</Text>
+            </View>
+          ))}
+        </View>
       </View>
 
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.9}
         onPress={onAdd}
-        style={styles.buttonWrapper}
+        onPressIn={() => setIsPressed(true)}
+        onPressOut={() => setIsPressed(false)}
+        style={[styles.pokedexButtonWrapper, isPressed && styles.buttonPressed]}
       >
-        <LinearGradient
-          colors={["#EE1515", "#fff"]} 
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0, y: 1.8 }}
-          style={styles.buttonGradient}
-        >
-          <View style={styles.buttonContent}>
-            <MaterialCommunityIcons
-              name="pokeball"
-              size={24}
-              color="#fff"
-              style={{ marginRight: 8 }}
-            />
-            <Text style={styles.buttonText}>Agregar</Text>
-          </View>
-        </LinearGradient>
+        <View style={styles.pokedexButtonOuter}>
+          <LinearGradient
+            colors={["#EE1515", "#fff"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1.8 }}
+            style={styles.pokedexButton}
+          >
+            <View style={styles.pokedexButtonInner}>
+              <MaterialCommunityIcons
+                name="pokeball"
+                size={20}
+                color="#fff"
+                style={{ marginRight: 6 }}
+              />
+              <Text style={styles.pokedexButtonText}>Agregar</Text>
+            </View>
+          </LinearGradient>
+        </View>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card: {
+   card: {
     margin: 8,
     padding: 12,
     borderRadius: 16,
@@ -107,63 +118,80 @@ const styles = StyleSheet.create({
     height: "88%",
     resizeMode: "contain",
   },
+  infoContainer: {
+    alignItems: 'center',
+    marginBottom: 16,
+  },
   id: {
     fontSize: 12,
-    fontWeight: "700",
     color: darkTheme.secondary,
+    fontWeight: '500',
     marginBottom: 4,
   },
   name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    textTransform: 'capitalize',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  priceContainer: {
+    backgroundColor: '#10B981',
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 20,
+    marginBottom: 12,
+  },
+  price: {
     fontSize: 16,
-    fontWeight: "700",
-    textTransform: "capitalize",
-    color: darkTheme.text,
-    marginBottom: 6,
+    fontWeight: '800',
+    color: '#FFFFFF',
   },
   typesContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    marginBottom: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    gap: 6,
   },
   typeBadge: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 12,
-    marginHorizontal: 2,
-    marginBottom: 4,
+    minWidth: 60,
   },
   typeText: {
-    color: "#fff",
-    fontWeight: "600",
+    color: '#FFFFFF',
     fontSize: 12,
-    textTransform: "capitalize",
+    fontWeight: '600',
+    textAlign: 'center',
+    textTransform: 'uppercase',
   },
-  buttonWrapper: {
+  pokedexButtonWrapper: {
+    marginTop: 'auto',
+  },
+  pokedexButtonOuter: {
     borderRadius: 25,
-    overflow: "hidden",
-    alignSelf: "stretch",
-    marginVertical: 4,
-    shadowColor: "#000",
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 6,
-    elevation: 5,
+    overflow: 'hidden',
   },
-  buttonGradient: {
-    paddingVertical: 8,
+  pokedexButton: {
+    padding: 2,
+  },
+  pokedexButtonInner: {
+    backgroundColor: '#EE1515',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
     paddingHorizontal: 16,
-    borderRadius: 25,
+    borderRadius: 23,
   },
-  buttonContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "700",
+  pokedexButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
     fontSize: 14,
-    letterSpacing: 0.5,
+  },
+  buttonPressed: {
+    transform: [{ scale: 0.95 }],
   },
 });
