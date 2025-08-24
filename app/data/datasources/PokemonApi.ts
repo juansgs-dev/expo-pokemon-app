@@ -1,12 +1,10 @@
 import axios from "axios";
 
-export interface PokemonResponse {
-  name: string;
-  url: string;
-}
-
 export interface PokemonListResponse {
-  results: PokemonResponse[];
+  results: {
+    name: string;
+    url: string;
+  }[];
 }
 
 export class PokemonApi {
@@ -16,6 +14,11 @@ export class PokemonApi {
     const response = await axios.get<PokemonListResponse>(
       `${this.baseUrl}/pokemon?limit=${limit}&offset=${offset}`
     );
+    return response.data;
+  }
+
+  async getPokemonByUrl(url: string): Promise<any> {
+    const response = await axios.get(url);
     return response.data;
   }
 }

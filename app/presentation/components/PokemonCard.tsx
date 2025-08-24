@@ -1,3 +1,4 @@
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -7,18 +8,40 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { darkTheme } from "../../theme/colors";
+
 
 type Props = {
+  id: string;
   name: string;
-  url: string;
-  price: string;
+  image: string;
+  types: string[];
   width: number;
   onAdd: () => void;
 };
 
-export default function PokemonCard({ name, url, price, width, onAdd }: Props) {
-  const id = getIdFromUrl(url);
-  const image = getArtworkUrl(id);
+const typeColors: Record<string, string> = {
+  normal: "#A8A77A",
+  fire: "#EE8130",
+  water: "#6390F0",
+  electric: "#F7D02C",
+  grass: "#7AC74C",
+  ice: "#96D9D6",
+  fighting: "#C22E28",
+  poison: "#A33EA1",
+  ground: "#E2BF65",
+  flying: "#A98FF3",
+  psychic: "#F95587",
+  bug: "#A6B91A",
+  rock: "#B6A136",
+  ghost: "#735797",
+  dragon: "#6F35FC",
+  dark: "#705746",
+  steel: "#B7B7CE",
+  fairy: "#D685AD",
+};
+
+export default function PokemonCard({ id, name, image, types, width, onAdd }: Props) {
   const [imgLoading, setImgLoading] = useState(true);
 
   return (
@@ -32,33 +55,43 @@ export default function PokemonCard({ name, url, price, width, onAdd }: Props) {
           style={styles.image}
           onLoadEnd={() => setImgLoading(false)}
         />
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>#{id}</Text>
-        </View>
       </View>
 
+      {/* ID */}
+      <Text style={styles.id}>#{id}</Text>
+
+      {/* Name */}
       <Text style={styles.name}>{name}</Text>
 
-      {/* 👇 Nuevo precio */}
-      <Text style={styles.price}>${price}</Text>
+      {/* Types */}
+      <View style={styles.typesContainer}>
+        {types.map((type) => (
+          <View
+            key={type}
+            style={[styles.typeBadge, { backgroundColor: typeColors[type] || "#777" }]}
+          >
+            <Text style={styles.typeText}>{type}</Text>
+          </View>
+        ))}
+      </View>
 
       <TouchableOpacity
         style={styles.button}
         onPress={onAdd}
-        activeOpacity={0.85}
+        activeOpacity={0.8}
       >
-        <Text style={styles.buttonText}>Agregar</Text>
+        <View style={styles.buttonContent}>
+          <MaterialCommunityIcons
+            name="pokeball"
+            size={24}
+            color="#fff"
+            style={{ marginRight: 8 }}
+          />
+          <Text style={styles.buttonText}>Agregar</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
-}
-
-function getIdFromUrl(url: string): number {
-  const match = url.match(/\/pokemon\/(\d+)\//);
-  return match ? Number(match[1]) : 0;
-}
-function getArtworkUrl(id: number) {
-  return `${process.env.EXPO_PUBLIC_IMG_URL}${id}.png`;
 }
 
 const styles = StyleSheet.create({
@@ -66,10 +99,10 @@ const styles = StyleSheet.create({
     margin: 8,
     padding: 12,
     borderRadius: 16,
-    backgroundColor: "#fff",
+    backgroundColor: darkTheme.card,
     alignItems: "center",
     shadowColor: "#000",
-    shadowOpacity: 0.08,
+    shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
     elevation: 3,
@@ -78,56 +111,71 @@ const styles = StyleSheet.create({
     width: "100%",
     aspectRatio: 1,
     borderRadius: 12,
-    backgroundColor: "#f3f4f6",
+    backgroundColor: "#1f1f1f",
     overflow: "hidden",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 8,
   },
   image: {
     width: "88%",
     height: "88%",
     resizeMode: "contain",
   },
-  badge: {
-    position: "absolute",
-    top: 8,
-    left: 8,
-    backgroundColor: "#111827",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 999,
-    opacity: 0.9,
-  },
-  badgeText: {
-    color: "#fff",
-    fontWeight: "700",
+  id: {
     fontSize: 12,
+    fontWeight: "700",
+    color: darkTheme.secondary,
+    marginBottom: 4,
   },
   name: {
     fontSize: 16,
     fontWeight: "700",
     textTransform: "capitalize",
-    color: "#111827",
-    marginBottom: 4,
+    color: darkTheme.text,
+    marginBottom: 6,
   },
-  price: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#10b981",
+  typesContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
     marginBottom: 8,
   },
+  typeBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginHorizontal: 2,
+    marginBottom: 4,
+  },
+  typeText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 12,
+    textTransform: "capitalize",
+  },
   button: {
-    backgroundColor: "#ef4444",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 10,
+    backgroundColor: darkTheme.primary,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 20, 
     alignSelf: "stretch",
+    shadowColor: "#000",
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 6,
+    elevation: 4,
+  },
+  buttonContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
     color: "#fff",
     textAlign: "center",
     fontWeight: "700",
-    fontSize: 14,
+    fontSize: 16,
+    letterSpacing: 0.5,
   },
 });

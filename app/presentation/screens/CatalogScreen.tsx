@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -18,33 +18,36 @@ export default function PokemonList() {
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState<any[]>([]);
+  const [hasMore, setHasMore] = useState(true); // ⚡ para saber si hay más Pokémon
 
-  const fetchPokemons = async () => {
-    if (loading) return;
+  const fetchPokemons = useCallback(async () => {
+    if (loading || !hasMore) return;
+
     setLoading(true);
 
     try {
-      const res = await repository.getPokemons(20, offset);
+      const newPokemons = await repository.getPokemons(20, offset);
 
-      const newPokemons = res.results.map((p) => ({
-        name: p.name,
-        url: p.url,
-        price: (Math.random() * 100).toFixed(2),
-      }));
+      if (newPokemons.length === 0) {
+        setHasMore(false); // no hay más Pokémon
+      } else {
+        setPokemons((prev) => {
+          const updated = [...prev, ...newPokemons].filter(
+            (p, index, self) =>
+              index === self.findIndex((obj) => obj.id === p.id)
+          );
+          console.log("Pokémons cargados:", updated.length);
+          return updated;
+        });
 
-      setPokemons((prev) =>
-        [...prev, ...newPokemons].filter(
-          (p, index, self) =>
-            index === self.findIndex((obj) => obj.url === p.url)
-        )
-      );
-
-      setOffset((prev) => prev + 20);
+        setOffset((prev) => prev + 20);
+      }
     } catch (err) {
       console.error(err);
     }
+
     setLoading(false);
-  };
+  }, [offset, loading, hasMore]);
 
   useEffect(() => {
     fetchPokemons();
@@ -58,19 +61,17 @@ export default function PokemonList() {
     <SafeAreaView className="flex-1 bg-gray-100">
       <FlatList
         data={pokemons}
-        keyExtractor={(item) => {
-          const id = item.url.split("/").filter(Boolean).pop();
-          return `pokemon-${id}`;
-        }}
+        keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerStyle={{ padding: 10 }}
         onEndReached={fetchPokemons}
         onEndReachedThreshold={0.5}
         renderItem={({ item }) => (
           <PokemonCard
+            id={item.id}
             name={item.name}
-            url={item.url}
-            price={item.price}
+            image={item.image}
+            types={item.types}
             width={CARD_WIDTH}
             onAdd={() => addToCart(item)}
           />
