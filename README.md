@@ -19,7 +19,7 @@ Se ha implementado una arquitectura que combina Clean Architecture con Redux par
 
 ### 🧩 Clean Architecture
 
-* La elección de Clean Architecture permite:
+La elección de Clean Architecture permite:
 
 * Mayor separación de responsabilidades entre capas de la aplicación
 
@@ -33,9 +33,9 @@ Se ha implementado una arquitectura que combina Clean Architecture con Redux par
 
 ---
 
-### 🔄 Redux para Estado Global**
+### 🔄 Redux para Estado Global
 
-* Se utilizó Redux específicamente para:
+Se utilizó Redux específicamente para:
 
 * Gestionar el estado complejo del carrito de compras de manera predecible
 
@@ -47,7 +47,7 @@ Se ha implementado una arquitectura que combina Clean Architecture con Redux par
 
 ### 🎯 Beneficios de esta Combinación
 
-* Esta combinación arquitectónica proporciona:
+Esta combinación arquitectónica proporciona:
 
 * Un códigobase organizado y fácil de extender
 
@@ -63,27 +63,27 @@ Se ha implementado una arquitectura que combina Clean Architecture con Redux par
 
 ### 🔔 Notificaciones Locales
 
-* **Implementación:** Notificación al reconectarse y sincronizar el carrito exitosamente.
+**Implementación:** Notificación al reconectarse y sincronizar el carrito exitosamente.
 
-* Proporciona confirmación visual inmediata de operaciones críticas
+    * Proporciona confirmación visual inmediata de operaciones críticas
 
-* Mejora la experiencia de usuario al ofrecer feedback sobre el estado de la sincronización
+    * Mejora la experiencia de usuario al ofrecer feedback sobre el estado de la sincronización
 
-* Aumenta la confiabilidad percibida de la aplicación
+    * Aumenta la confiabilidad percibida de la aplicación
 
-* Mantiene informado al usuario sin interrumpir su flujo de trabajo actual
+    * Mantiene informado al usuario sin interrumpir su flujo de trabajo actual
 
 ### 📳 Vibración o Feedback Háptico
 
-* **Implementación:** Feedback táctil al agregar o eliminar ítems del carrito.
+**Implementación:** Feedback táctil al agregar o eliminar ítems del carrito.
 
-* Refuerza las acciones del usuario con respuesta sensorial inmediata
+    * Refuerza las acciones del usuario con respuesta sensorial inmediata
 
-* Mejora la accesibilidad para usuarios con discapacidades visuales
+    * Mejora la accesibilidad para usuarios con discapacidades visuales
 
-* Proporciona una experiencia más inmersiva e interactiva
+    * Proporciona una experiencia más inmersiva e interactiva
 
-* Previene errores al confirmar acciones sensibles como eliminación de elementos
+    * Previene errores al confirmar acciones sensibles como eliminación de elementos
 
 ---
 
@@ -115,11 +115,11 @@ Se ha implementado una arquitectura que combina Clean Architecture con Redux par
 
 ## Previsualización:
 
-### Catalogo Pokemones
+### 🐛 Catalogo Pokémones:
 
 ![Interfaz de búsqueda](./assets/images/Catalogo.png)
 
-### Pokedex
+### 🎮 Pokédex:
 
 ![Interfaz de búsqueda](./assets/images/Pokedex.png)
 
@@ -160,4 +160,6 @@ Para correr la aplicación en tu entorno de desarrollo, sigue estos sencillos pa
 
 ---
 
-_¡Disfruta explorando el mundo Pokémon con esta app!_
+Realizado por: Juan Sebastian Gonzalez Sossa 
+
+Informacion de contacto: linkedin.com/in/juansgs
