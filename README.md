@@ -160,6 +160,14 @@ Para correr la aplicación en tu entorno de desarrollo, sigue estos sencillos pa
 
 ---
 
-Realizado por: Juan Sebastian Gonzalez Sossa 
+### 🔽 Link para descargar el APK:
 
-Informacion de contacto: linkedin.com/in/juansgs
+https://drive.google.com/file/d/1pBb_ticZDEqTVnzBu1YGGv4MZQZjUHV5/view?usp=sharing
+
+---
+
+### 👤 Información de contacto:
+
+**Realizado por:** Juan Sebastian Gonzalez Sossa 
+
+**Información de contacto:** linkedin.com/in/juansgs
