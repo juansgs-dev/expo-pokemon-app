@@ -1,50 +1,51 @@
-# Welcome to your Expo app 👋
+# ⚡ Pokédex App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+¡Bienvenido a la **Pokédex App**! Esta es una aplicación móvil desarrollada en **React Native** que funciona como un catálogo interactivo de Pokémon. Además de explorar a tus criaturas favoritas, puedes añadirlas a un carrito de compras virtual.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Características Principales
 
-   ```bash
-   npm install
-   ```
+* **Catálogo de Pokémon:** Explora un extenso catálogo de Pokémon con detalles relevantes de cada uno.
+* **Carrito de Compras:** Agrega y gestiona tus Pokémon favoritos en un carrito. Puedes ajustar cantidades y ver el total de tu selección.
+* **Arquitectura Limpia:** El proyecto sigue los principios de **Clean Architecture**, lo que garantiza un código modular, escalable y fácil de mantener.
+* **Gestión de Estado con Redux:** Se utiliza **Redux Toolkit** para una gestión de estado predecible y centralizada, asegurando que los datos del catálogo y el carrito estén siempre sincronizados.
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🛠️ Cómo Ejecutar el Proyecto
 
-In the output, you'll find options to open the app in a
+Para correr la aplicación en tu entorno de desarrollo, sigue estos sencillos pasos:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1.  **Clona el repositorio:**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+    ```bash
+    git clone [URL_DEL_REPOSITORIO]
+    cd [NOMBRE_DEL_DIRECTORIO]
+    ```
 
-## Get a fresh project
+2.  **Instala las dependencias:**
 
-When you're ready, run:
+    ```bash
+    npm install
+    ```
 
-```bash
-npm run reset-project
-```
+3.  **Configura las variables de entorno:**
+    Copia el archivo de plantilla `.env.template` y renómbralo a `.env`.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+    ```bash
+    cp .env.template .env
+    ```
 
-## Learn more
+4.  **Inicia la aplicación:**
+    Ejecuta el siguiente comando para iniciar el servidor de desarrollo de Expo.
 
-To learn more about developing your project with Expo, look at the following resources:
+    ```bash
+    npx expo start
+    ```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+    Después de ejecutar este comando, se abrirá una pestaña en tu navegador con un código QR. Puedes escanearlo con la app **Expo Go** en tu dispositivo móvil o usar un emulador para ver la aplicación en acción.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+_¡Disfruta explorando el mundo Pokémon con esta app!_
