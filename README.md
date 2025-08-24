@@ -20,8 +20,8 @@ Para correr la aplicación en tu entorno de desarrollo, sigue estos sencillos pa
 1.  **Clona el repositorio:**
 
     ```bash
-    git clone [URL_DEL_REPOSITORIO]
-    cd [NOMBRE_DEL_DIRECTORIO]
+    git clone https://github.com/juansgs-dev/expo-pokemon-app.git
+    cd expo-pokemon-app
     ```
 
 2.  **Instala las dependencias:**
