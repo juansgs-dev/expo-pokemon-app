@@ -21,7 +21,6 @@ Para correr la aplicación en tu entorno de desarrollo, sigue estos sencillos pa
 
     ```bash
     git clone [URL_DEL_REPOSITORIO]
-    cd [NOMBRE_DEL_DIRECTORIO]
     ```
 
 2.  **Instala las dependencias:**
