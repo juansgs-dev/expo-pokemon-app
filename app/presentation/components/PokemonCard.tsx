@@ -1,4 +1,6 @@
+import typeColors from '@/app/helpers/colorTypes';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -20,27 +22,6 @@ type Props = {
   onAdd: () => void;
 };
 
-const typeColors: Record<string, string> = {
-  normal: "#A8A77A",
-  fire: "#EE8130",
-  water: "#6390F0",
-  electric: "#F7D02C",
-  grass: "#7AC74C",
-  ice: "#96D9D6",
-  fighting: "#C22E28",
-  poison: "#A33EA1",
-  ground: "#E2BF65",
-  flying: "#A98FF3",
-  psychic: "#F95587",
-  bug: "#A6B91A",
-  rock: "#B6A136",
-  ghost: "#735797",
-  dragon: "#6F35FC",
-  dark: "#705746",
-  steel: "#B7B7CE",
-  fairy: "#D685AD",
-};
-
 export default function PokemonCard({ id, name, image, types, width, onAdd }: Props) {
   const [imgLoading, setImgLoading] = useState(true);
 
@@ -57,13 +38,10 @@ export default function PokemonCard({ id, name, image, types, width, onAdd }: Pr
         />
       </View>
 
-      {/* ID */}
       <Text style={styles.id}>#{id}</Text>
 
-      {/* Name */}
       <Text style={styles.name}>{name}</Text>
 
-      {/* Types */}
       <View style={styles.typesContainer}>
         {types.map((type) => (
           <View
@@ -76,19 +54,26 @@ export default function PokemonCard({ id, name, image, types, width, onAdd }: Pr
       </View>
 
       <TouchableOpacity
-        style={styles.button}
-        onPress={onAdd}
         activeOpacity={0.8}
+        onPress={onAdd}
+        style={styles.buttonWrapper}
       >
-        <View style={styles.buttonContent}>
-          <MaterialCommunityIcons
-            name="pokeball"
-            size={24}
-            color="#fff"
-            style={{ marginRight: 8 }}
-          />
-          <Text style={styles.buttonText}>Agregar</Text>
-        </View>
+        <LinearGradient
+          colors={["#EE1515", "#fff"]} 
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1.8 }}
+          style={styles.buttonGradient}
+        >
+          <View style={styles.buttonContent}>
+            <MaterialCommunityIcons
+              name="pokeball"
+              size={24}
+              color="#fff"
+              style={{ marginRight: 8 }}
+            />
+            <Text style={styles.buttonText}>Agregar</Text>
+          </View>
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );
@@ -154,17 +139,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textTransform: "capitalize",
   },
-  button: {
-    backgroundColor: darkTheme.primary,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 20, 
+  buttonWrapper: {
+    borderRadius: 25,
+    overflow: "hidden",
     alignSelf: "stretch",
+    marginVertical: 4,
     shadowColor: "#000",
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.3,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 6,
-    elevation: 4,
+    elevation: 5,
+  },
+  buttonGradient: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 25,
   },
   buttonContent: {
     flexDirection: "row",
@@ -173,9 +162,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    textAlign: "center",
     fontWeight: "700",
-    fontSize: 16,
+    fontSize: 14,
     letterSpacing: 0.5,
   },
 });
