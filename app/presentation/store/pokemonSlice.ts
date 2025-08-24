@@ -1,6 +1,8 @@
 import { PokedexItem } from "@/app/domain/entities/PokedexItem";
 import { Pokemon } from "@/app/domain/entities/Pokemon";
+import { VIBRATION_PATTERNS } from "@/app/helpers/vibrations";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Vibration } from "react-native";
 import { GetPokemons } from "../../domain/usecases/GetPokemons";
 
 const getPokemons = new GetPokemons();
@@ -37,6 +39,10 @@ const initialState: PokemonState = {
   error: null,
 };
 
+const vibrate = (pattern: number[]) => {
+    Vibration.vibrate(pattern);
+};
+
 export const syncPendingOperations = createAsyncThunk(
   "pokemon/syncPendingOperations",
   async (_, { getState }) => {
@@ -65,6 +71,8 @@ const pokemonSlice = createSlice({
         });
       }
 
+      vibrate(VIBRATION_PATTERNS.ADD);
+
       state.pendingOperations.push({
         type: 'add',
         payload: action.payload,
@@ -79,8 +87,10 @@ const pokemonSlice = createSlice({
       if (existingItem) {
         if (existingItem.quantity > 1) {
           existingItem.quantity -= 1;
+          vibrate(VIBRATION_PATTERNS.REMOVE);
         } else {
           state.pokedex = state.pokedex.filter(item => item.pokemon.id !== action.payload);
+          vibrate(VIBRATION_PATTERNS.REMOVEALL);
         }
 
         if (existingItem) {

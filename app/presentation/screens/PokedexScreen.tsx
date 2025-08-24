@@ -1,4 +1,5 @@
 import typeColors from "@/app/helpers/colorTypes";
+import { VIBRATION_PATTERNS } from "@/app/helpers/vibrations";
 import React, { FC, useEffect, useState } from "react";
 import {
   Animated,
@@ -9,6 +10,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Vibration,
   View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,6 +45,10 @@ const PokedexScreen: FC = () => {
   const fadeAnim = useState(new Animated.Value(0))[0];
 
   const totalPrice = calculateTotalPrice(pokedexItems);
+
+  const vibrate = (pattern: number[]) => {
+      Vibration.vibrate(pattern);
+  };
 
   useEffect(() => {
     if (pokedexItems.length > 0 && currentIndex >= pokedexItems.length) {
@@ -159,6 +165,8 @@ const PokedexScreen: FC = () => {
 
 const handleConfirmPurchase = () => {
   setShowModal(false);
+
+  vibrate(VIBRATION_PATTERNS.EXITO);
   
   setModalType('success');
   setShowModal(true);
