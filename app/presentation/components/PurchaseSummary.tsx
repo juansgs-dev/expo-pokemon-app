@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -16,7 +16,7 @@ interface PurchaseSummaryProps {
   onPurchase: () => void;
 }
 
-const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
+const PurchaseSummary: FC<PurchaseSummaryProps> = ({
   totalPokemons,
   uniqueSpecies,
   totalPrice,

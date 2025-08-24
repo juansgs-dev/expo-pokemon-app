@@ -1,5 +1,5 @@
 import typeColors from "@/app/helpers/colorTypes";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -30,7 +30,7 @@ const calculateTotalPrice = (pokedexItems: any[]) => {
   }, 0);
 };
 
-const PokedexScreen: React.FC = () => {
+const PokedexScreen: FC = () => {
   const dispatch = useDispatch();
   const pokedexItems = useSelector(selectPokedexItems);
   const totalPokemons = useSelector(selectTotalPokemons);
@@ -57,7 +57,7 @@ const PokedexScreen: React.FC = () => {
 
         Animated.timing(fadeAnim, {
           toValue: 1,
-          duration: 1000,
+          duration: 2000,
           easing: Easing.out(Easing.exp),
           useNativeDriver: true,
         }).start();

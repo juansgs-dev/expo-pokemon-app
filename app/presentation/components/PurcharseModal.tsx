@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import {
     Dimensions,
     StyleSheet,
@@ -22,7 +22,7 @@ interface PurchaseModalProps {
     visible: boolean;
 }
 
-const PurchaseModal: React.FC<PurchaseModalProps> = ({
+const PurchaseModal: FC<PurchaseModalProps> = ({
     type,
     totalPokemons = 0,
     uniqueSpecies = 0,
@@ -38,7 +38,7 @@ const PurchaseModal: React.FC<PurchaseModalProps> = ({
         switch (type) {
             case 'confirm':
                 return (
-                    <>
+                    <View>
                         <View style={styles.modalHeader}>
                             <Text style={styles.modalTitle}>Confirmar Compra</Text>
                         </View>
@@ -79,12 +79,12 @@ const PurchaseModal: React.FC<PurchaseModalProps> = ({
                                 <Text style={styles.confirmButtonText}>¡Comprar!</Text>
                             </TouchableOpacity>
                         </View>
-                    </>
+                    </View>
                 );
 
             case 'success':
                 return (
-                    <>
+                    <View>
                         <View style={[styles.modalHeader, styles.successHeader]}>
                             <Text style={styles.modalTitle}>¡Compra Exitosa!</Text>
                         </View>
@@ -118,12 +118,12 @@ const PurchaseModal: React.FC<PurchaseModalProps> = ({
                                 <Text style={styles.successButtonText}>¡Genial!</Text>
                             </TouchableOpacity>
                         </View>
-                    </>
+                    </View>
                 );
 
             case 'empty':
                 return (
-                    <>
+                    <View>
                         <View style={[styles.modalHeader, styles.emptyHeader]}>
                             <Text style={styles.modalTitle}>Pokédex Vacía</Text>
                         </View>
@@ -145,7 +145,7 @@ const PurchaseModal: React.FC<PurchaseModalProps> = ({
                                 <Text style={styles.emptyButtonText}>¡Entendido!</Text>
                             </TouchableOpacity>
                         </View>
-                    </>
+                    </View>
                 );
         }
     };
